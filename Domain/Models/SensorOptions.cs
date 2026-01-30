@@ -9,10 +9,10 @@ namespace Domain.Models
     public class SensorOptions
     {
         public int Id { get; set; }
-        public string Host { get; set; } = "";
+        public string Host { get; set; } = "192.168.31.50";
         public int Port { get; set; } = 502;
         public byte SlaveId { get; set; } = 1;
-        public int BaseAddress { get; set; } = 0;
+        public int BaseAddress { get; set; } = 2;
         public float TempOffset { get; set; } = 0;
         public float HumiOffset { get; set; } = 0;
 

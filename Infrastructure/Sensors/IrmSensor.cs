@@ -51,8 +51,9 @@ namespace Infrastructure.Sensors
 
                     // Đọc dữ liệu đồng bộ - FluentModbus 5.0.0 sử dụng Span bên trong 
                     // nên cần thực thi trong ngữ cảnh không phải phương thức async
-                    var data = _client.ReadInputRegisters<short>(_options.SlaveId, _options.BaseAddress, 2);
+                    //var data = _client.ReadInputRegisters<short>(_options.SlaveId, _options.BaseAddress, 2);
 
+                    var data = _client.ReadInputRegisters<short>(_options.SlaveId, _options.BaseAddress, 2);
                     float temp = (data[0] / 10.0f) + _options.TempOffset; //
                     float humi = (data[1] / 10.0f) + _options.HumiOffset; //
 
