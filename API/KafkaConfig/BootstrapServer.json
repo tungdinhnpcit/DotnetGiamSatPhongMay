@@ -1,0 +1,9 @@
+{
+  "KafkaSettings": {
+    "BootstrapServers": "10.21.69.11:9092",
+    "Topics": {
+      "UserActionTopic": "my-reponsive-topic",
+      "DbProcessingTopic": "db-processing-topic"
+    }
+  }
+}
