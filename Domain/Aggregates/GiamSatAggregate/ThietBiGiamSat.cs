@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Domain.Aggregates.GiamSatAggregate
 
         private ThietBiGiamSat() : base() { }
 
-        public ThietBiGiamSat(string ma, string viTri, double maxT, double maxH) : base()
+        public ThietBiGiamSat(string ma, string viTri, double maxT = 80, double maxH = 50) : base()
         {
             MaThietBi = ma;
             TenViTri = viTri;
@@ -28,15 +29,17 @@ namespace Domain.Aggregates.GiamSatAggregate
 
         // --- BEHAVIORS (Nghiệp vụ) ---
 
-        public void TiepNhanDuLieu(double t, double h)
+        public void CapNhatDuLieu(double nhietDo, double doAm)
         {
             // Khởi tạo Value Object (tự validate bên trong nó)
-            this.ChiSoHienTai = new ChiSoMoiTruong(t, h);
+            this.ChiSoHienTai = new ChiSoMoiTruong(nhietDo, doAm);
 
             // Logic kiểm tra cả Nhiệt độ và Độ ẩm
-            if (t > NguongNhietDo || h > NguongDoAm)
+            if (nhietDo > NguongNhietDo)
             {
-                AddDomainEvent(new CanhBaoMoiTruongEvent(this.MaThietBi, t, h));
+                // Nếu nóng quá -> Bắn Domain Event
+                // Các bên khác (Email, SignalR) sẽ nghe Event này
+                AddDomainEvent(new CanhBaoNhietDoEvent(this.MaThietBi, nhietDo));
             }
         }
 

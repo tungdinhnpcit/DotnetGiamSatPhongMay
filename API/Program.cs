@@ -29,14 +29,7 @@ try
 
     app.MapControllers();
 
-    // THÊM ĐOẠN NÀY ĐỂ DEBUG
-    var url = "http://localhost:5005";
-    Console.WriteLine($"--------------------------------------------------");
-    Console.WriteLine($"✅ API ĐÃ KHỞI ĐỘNG THÀNH CÔNG!");
-    Console.WriteLine($"👉 Swagger UI: {url}/swagger");
-    Console.WriteLine($"--------------------------------------------------");
-
-    app.Run("http://localhost:5005");
+    app.Run();
 }
 catch (Exception ex)
 {

@@ -8,12 +8,12 @@ namespace Domain.Common
 {
     public abstract class Entity
     {
-        // 1. Định danh duy nhất cho Entity
+        // Định danh duy nhất cho Entity
         public virtual Guid Id { get; protected set; }
 
-        // 2. Danh sách các sự kiện Domain (Domain Events)
+        // Danh sách các sự kiện Domain (Domain Events)
         // Dùng để thông báo các thay đổi quan trọng (VD: Vượt ngưỡng nhiệt độ)
-        private List<IDomainEvent> _domainEvents;
+        private readonly List<IDomainEvent> _domainEvents = new();
         public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
 
         protected Entity()
@@ -23,10 +23,12 @@ namespace Domain.Common
         }
 
         // Phương thức để thêm sự kiện vào danh sách chờ xử lý
-        public void AddDomainEvent(IDomainEvent eventItem)
+        public void AddDomainEvent(IDomainEvent domainEvent)
         {
-            _domainEvents ??= new List<IDomainEvent>();
-            _domainEvents.Add(eventItem);
+            if (domainEvent != null)
+            {
+                _domainEvents.Add(domainEvent);
+            }
         }
 
         // Xóa danh sách sự kiện sau khi đã được gửi đi thành công
