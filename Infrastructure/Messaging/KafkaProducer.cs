@@ -8,10 +8,9 @@ namespace Infrastructure.Messaging
     {
         private readonly IProducer<Null, string> _producer;
 
-        public KafkaProducer(string bootstrapServers)
+        public KafkaProducer(IProducer<Null, string> producer)
         {
-            var config = new ProducerConfig { BootstrapServers = bootstrapServers };
-            _producer = new ProducerBuilder<Null, string>(config).Build();
+            _producer = producer;
         }
 
         public async Task ProduceAsync<T>(string topic, T message)
