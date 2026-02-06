@@ -10,7 +10,7 @@ namespace API.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Product API",
+                    Title = "GiamSat API",
                     Version = "v1"
                 });
             });
@@ -21,14 +21,15 @@ namespace API.Extensions
         public static WebApplication UseSwaggerInfrastructure(this WebApplication app)
         {
             // Kiểm tra môi trường ngay trong Extension
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "GiamSat API V1");
+                    c.RoutePrefix = "swagger"; // Đảm bảo truy cập qua /swagger
                 });
-            }
+            //}
 
             return app;
         }

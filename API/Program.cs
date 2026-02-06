@@ -36,7 +36,7 @@ try
     Console.WriteLine($"👉 Swagger UI: {url}/swagger");
     Console.WriteLine($"--------------------------------------------------");
 
-    app.Run();
+    app.Run("http://localhost:5005");
 }
 catch (Exception ex)
 {

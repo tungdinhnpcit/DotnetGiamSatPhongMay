@@ -40,8 +40,12 @@ namespace Infrastructure.Messaging
                     {
                         // 1. Chờ tin nhắn (Block 100ms)
                         var consumeResult = consumer.Consume(TimeSpan.FromMilliseconds(100));
-
-                        if (consumeResult?.Message == null) continue;
+                        if (consumeResult == null)
+                        {
+                            await Task.Delay(100, stoppingToken);
+                            continue;
+                        }    
+                        
 
                         _logger.LogInformation($"Nhận dữ liệu: {consumeResult.Message.Value}");
 
@@ -54,6 +58,7 @@ namespace Infrastructure.Messaging
                     catch (ConsumeException e)
                     {
                         _logger.LogError($"Lỗi nhận tin Kafka: {e.Error.Reason}");
+                        await Task.Delay(1000, stoppingToken);
                     }
                 }
             }
