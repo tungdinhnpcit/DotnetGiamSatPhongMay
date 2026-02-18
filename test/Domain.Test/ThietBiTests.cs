@@ -11,13 +11,15 @@ namespace Domain.Test
         [Fact]
         public void CapNhatChiSo_NhietDoVuotNguong_PhaiSinhDomainEvent()
         {
-            // 1. Arrange (Chuẩn bị)
-            var thietBi = new ThietBiGiamSat("TB01", "Phong Server 1",10 ,20);
+            // Arrange
+            double nguongNhiet = 24;
+            double nhietDoAnToan = 20;
+            var thietBi = new ThietBiGiamSat("TB01", "Phong Server 1", nguongNhiet, 20);
             // Giả sử logic của bạn quy định > 80 độ là cảnh báo
 
             // 2. Act (Hành động)
             // Cập nhật 90 độ (Vượt ngưỡng)
-            thietBi.CapNhatDuLieu(24, 70);
+            thietBi.CapNhatDuLieu(nhietDoAnToan, 70);
 
             // 3. Assert (Kiểm tra kết quả)
             // Kiểm tra xem biến DomainEvents có chứa event nào không
