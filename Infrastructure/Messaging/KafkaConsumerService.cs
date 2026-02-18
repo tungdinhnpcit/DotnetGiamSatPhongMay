@@ -13,15 +13,15 @@ namespace Infrastructure.Messaging
     {
         private readonly ConsumerConfig _config;
         private readonly ILogger<KafkaConsumerService> _logger;
+        private readonly IServiceScopeFactory _scopeFactory;
         private readonly IServiceProvider _serviceProvider; // Dùng để tạo Scope
         private const string TopicName = "iot-sensor-data"; // Topic cần nghe
 
-        public KafkaConsumerService(ConsumerConfig config, ILogger<KafkaConsumerService> logger, IServiceProvider serviceProvider)
-        {
-            _config = config;
-            _logger = logger;
-            _serviceProvider = serviceProvider;
-        }
+        public KafkaConsumerService(ConsumerConfig config, IServiceScopeFactory scopeFactory)
+    {
+        _config = config;
+        _scopeFactory = scopeFactory;
+    }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {

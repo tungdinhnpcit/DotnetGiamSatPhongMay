@@ -16,7 +16,7 @@ namespace API.Extensions
             var bootstrapServers = kafkaSettings["BootstrapServers"];
             var topicName = "iot-sensor-data";
             // Tạo Topic tự động nếu chưa có (Dùng AdminClient)
-            //EnsureTopicExists(bootstrapServers, topicName);
+            EnsureTopicExists(bootstrapServers, topicName);
 
             // Validate cấu hình
             if (string.IsNullOrEmpty(bootstrapServers))

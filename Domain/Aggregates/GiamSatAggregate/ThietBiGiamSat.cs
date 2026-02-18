@@ -26,15 +26,18 @@ namespace Domain.Aggregates.GiamSatAggregate
 
         public void CapNhatDuLieu(double nhietDo, double doAm)
         {
-            // Khởi tạo Value Object (tự validate bên trong nó)
-            this.ChiSoHienTai = new ChiSoMoiTruong(nhietDo, doAm);
+            // 1. Luôn bắn event ghi nhận dữ liệu (Để lưu lịch sử/log)
+            AddDomainEvent(new TelemetryDataReceivedEvent(this.MaThietBi, nhietDo, doAm, DateTime.Now));
 
-            // Logic kiểm tra cả Nhiệt độ và Độ ẩm
+            // 2. Kiểm tra ngưỡng để bắn cảnh báo
             if (nhietDo > NguongNhietDo)
             {
-                // Nếu nóng quá -> Bắn Domain Event
-                // Các bên khác (Email, SignalR) sẽ nghe Event này
                 AddDomainEvent(new CanhBaoNhietDoEvent(this.MaThietBi, nhietDo));
+            }
+
+            if (doAm > NguongDoAm)
+            {
+                // Thêm event cảnh báo độ ẩm nếu cần
             }
         }
 

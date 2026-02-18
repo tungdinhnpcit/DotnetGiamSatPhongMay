@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Application.Configurations;
+using Domain.Interfaces;
 using Domain.Models;         // Chứa SensorOptions
 using Infrastructure.Sensors; // Chứa IrmSensor
 using Microsoft.Extensions.Options;
@@ -6,6 +7,10 @@ using System.Threading.Channels;
 using WorkerService;
 
 var builder = Host.CreateApplicationBuilder(args);
+
+// Trong Program.cs
+builder.Services.Configure<DeviceSettings>(
+    builder.Configuration.GetSection("DeviceSettings"));
 
 // 1. Đăng ký Channel để truyền dữ liệu giữa Worker và các phần khác (nếu có)
 builder.Services.AddSingleton(Channel.CreateUnbounded<SensorReadResult>());

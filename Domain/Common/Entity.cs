@@ -14,7 +14,8 @@ namespace Domain.Common
         // Danh sách các sự kiện Domain (Domain Events)
         // Dùng để thông báo các thay đổi quan trọng (VD: Vượt ngưỡng nhiệt độ)
         private readonly List<IDomainEvent> _domainEvents = new();
-        public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
+        // Property này phải là PUBLIC để KafkaDispatcher đọc được
+        public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
         protected Entity()
         {

@@ -25,5 +25,30 @@ namespace Infrastructure.Repositories
                 return await connection.ExecuteAsync(query, chiSo);
             }
         }
+
+        Task<int> IThietBiRepository.AddAsync(ThietBiGiamSat thietBi)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<ThietBiGiamSat> IThietBiRepository.GetByMaThietBiAsync(string ma)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IThietBiRepository.InsertChiSoMoiTruongAsync(ChiSoMoiTruong chiSo)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IThietBiRepository.SaveTelemetryAsync(string maThietBi, double t, double h)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IThietBiRepository.UpdateAsync(ThietBiGiamSat thietBi)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
